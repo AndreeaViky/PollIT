@@ -1,0 +1,33 @@
+.text {
+    color: #04395E;
+    justify-content: space-between;
+    align-items: center;
+    float: right;
+    margin-left: 20px;
+}
+
+.logo {
+    position: absolute;
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+}
+
+.nav {
+    width: 100%;
+    position: absolute;
+    height: 65px;
+    display: block;
+    flex-direction: row;
+    justify-content: space-between;
+    top: 0;
+    background-color: white;
+    size: 1rem;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    margin-right: 20px;
+}

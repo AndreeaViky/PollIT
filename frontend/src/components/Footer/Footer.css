@@ -1,0 +1,21 @@
+.footer {
+    position: absolute;
+    width: 100%;
+    align-items: center;
+    background-color: #FF1F66;
+    bottom: 0;
+}
+
+.icons {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0.1rem;
+    padding-right: 0.2rem;
+    width: auto;
+}
+
+.one-icon {
+    height: 65px;
+}
