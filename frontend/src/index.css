@@ -14,6 +14,10 @@
   -webkit-text-size-adjust: 100%;
 }
 
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
 a {
   font-weight: 500;
   color: #04395E;
@@ -27,6 +31,7 @@ body {
   min-height: 100vh;
   background-image: url(./assets/background.png);
   background-size: cover;
+  overflow: hidden;
 }
  
 #root {

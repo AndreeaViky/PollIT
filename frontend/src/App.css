@@ -1,0 +1,33 @@
+.page {
+    margin-top: 65px;
+    margin-bottom: 65px; 
+    overflow-y: auto;
+}
+
+.testoasa {
+    aspect-ratio: 1;
+}
+
+.header {
+    display: flex;
+    color: white;
+    max-width: 100%;
+    align-items: center;
+    padding: 20px;
+}
+
+p {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-left: 20px;
+}
+
+@media (max-width: 600px) {
+    p {
+      font-size: 10px;
+    }
+
+    .testoasa {
+        width: 100%;
+    }
+  }
