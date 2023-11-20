@@ -3,13 +3,14 @@ import "./App.css";
 
 import Navbar from "./components/Navbar/Navbar.jsx";
 import Footer from "./components/Footer/Footer.jsx";
+import Cards from "./components/Cards/cards.jsx";
 
 import Testoasa from "./assets/testoasa.png";
 
 function App() {
   return (
     <>
-      <Navbar />
+      <Navbar />  
       <div className="page">
         <div className="header">
           <p>
@@ -20,6 +21,10 @@ function App() {
           <div>
             <img className="testoasa" src={Testoasa} />
           </div>
+        </div>
+
+        <div>
+          <Cards />
         </div>
       </div>
       <Footer />

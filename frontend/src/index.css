@@ -28,15 +28,16 @@ body {
   margin: 0;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
   background-image: url(./assets/background.png);
   background-size: cover;
   overflow: hidden;
+  height: 100vh;
 }
  
 #root {
-  height: inherit;
-  width: inherit;
+  height: 100%;
+  padding-top: 65px;
+  padding-bottom: 65px;
 }
 
 h1 {
