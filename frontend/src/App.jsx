@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 
 import Navbar from "./components/Navbar/Navbar.jsx";
 import Footer from "./components/Footer/Footer.jsx";
-import Cards from "./components/Cards/cards.jsx";
+import Cards from "./components/Cards/Cards.jsx";
 
 import Testoasa from "./assets/testoasa.png";
 
 function App() {
   return (
     <>
-      <Navbar />  
+      <Navbar />
       <div className="page">
         <div className="header">
           <p>

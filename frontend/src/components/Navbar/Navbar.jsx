@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import Logo from "../../assets/logo.png";
+
 import "./Navbar.css";
+import { Login } from "../../pages/Login/Login";
+import { Register } from "../../pages/Register/Register";
 
 function Navbar() {
   return (
     <div className="nav-navbar">
-      <div className="logo">
-        <img src={Logo} alt="Logo" />
-      </div>
+      <img src={Logo} alt="Logo" />
 
       <div className="text">
         <ul>
-          <a href="/login">Login</a>
-          <a href="/register">Register</a>
+          <Login />
+          <Register />
         </ul>
       </div>
     </div>

@@ -1,0 +1,12 @@
+.authForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginForm {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
