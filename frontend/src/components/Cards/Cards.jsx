@@ -12,6 +12,7 @@ import "./Cards.css";
 
 export default function Cards() {
   return (
+    <div className="cards">
     <MDBRow className="row-cols-1 row-cols-md-2 g-4">
       <MDBCol className="card-margin">
         <MDBCard>
@@ -38,6 +39,7 @@ export default function Cards() {
                   <span> Un caine</span>
                 </li>
               </ul>
+              <button type="submit">Vote</button>
             </div>
           </MDBCardBody>
         </MDBCard>
@@ -52,22 +54,23 @@ export default function Cards() {
             <div>
               <ul>
                 <li className="option">
-                  <input type="radio" name="tricou" />
+                  <input type="radio" name="coordonator" />
                   <span> Edi</span>
                 </li>
                 <li className="option">
-                  <input type="radio" name="tricou" />
+                  <input type="radio" name="coordonator" />
                   <span> Mari</span>
                 </li>
                 <li className="option">
-                  <input type="radio" name="tricou" />
+                  <input type="radio" name="coordonator" />
                   <span> Bogdan</span>
                 </li>
                 <li className="option">
-                  <input type="radio" name="tricou" />
+                  <input type="radio" name="coordonator" />
                   <span> Codrut</span>
                 </li>
               </ul>
+              <button type="submit">Vote</button>
             </div>
           </MDBCardBody>
         </MDBCard>
@@ -80,22 +83,23 @@ export default function Cards() {
             <div>
               <ul>
                 <li className="option">
-                  <input type="radio" name="tricou" />
+                  <input type="radio" name="infra" />
                   <span> Rober</span>
                 </li>
                 <li className="option">
-                  <input type="radio" name="tricou" />
+                  <input type="radio" name="infra" />
                   <span> Vlad</span>
                 </li>
                 <li className="option">
-                  <input type="radio" name="tricou" />
+                  <input type="radio" name="infra" />
                   <span> Andrei</span>
                 </li>
                 <li className="option">
-                  <input type="radio" name="tricou" />
+                  <input type="radio" name="infra" />
                   <span> Povi</span>
                 </li>
               </ul>
+              <button type="submit">Vote</button>
             </div>
           </MDBCardBody>
         </MDBCard>
@@ -110,26 +114,28 @@ export default function Cards() {
             <div>
               <ul>
                 <li className="option">
-                  <input type="radio" name="tricou" />
+                  <input type="radio" name="BW" />
                   <span> Rares</span>
                 </li>
                 <li className="option">
-                  <input type="radio" name="tricou" />
+                  <input type="radio" name="BW" />
                   <span> Cip</span>
                 </li>
                 <li className="option">
-                  <input type="radio" name="tricou" />
+                  <input type="radio" name="BW" />
                   <span> Alexa</span>
                 </li>
                 <li className="option">
-                  <input type="radio" name="tricou" />
+                  <input type="radio" name="BW" />
                   <span> Mihai (MeHigh)</span>
                 </li>
               </ul>
+              <button type="submit">Vote</button>
             </div>
           </MDBCardBody>
         </MDBCard>
       </MDBCol>
     </MDBRow>
+    </div>
   );
 }

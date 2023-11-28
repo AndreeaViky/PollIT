@@ -15,11 +15,9 @@ export const Register = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(email);
-  };
+  const [confirmPass, setConfirmPass] = useState("");
+  const [error, setError] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
 
   function close() {
     setIsOpen(false);
@@ -29,6 +27,38 @@ export const Register = () => {
     console.log("open");
     setIsOpen(true);
   }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(email);
+    setError(""); // Resetare erori la fiecare încercare
+    if (pass !== confirmPass) {
+      setError("Parolele nu se potrivesc.");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:3000/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password: pass }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setIsSuccess(true);
+        console.log("Înregistrare reușită:", data);
+        window.location.href = "/";
+      } else {
+        setError(data.error || "Eroare la înregistrare.");
+      }
+    } catch (error) {
+      setError("Eroare de rețea.");
+      console.error("Network error:", error);
+    }
+  };
 
   return (
     <>
@@ -53,33 +83,39 @@ export const Register = () => {
               <div className="authForm">
                 <form className="registerForm" onSubmit={handleSubmit}>
                   <input
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     type="email"
                     placeholder="Email"
                     id="email"
                     name="email"
                   />
                   <input
+                    value={pass}
+                    onChange={(e) => setPass(e.target.value)}
                     type="password"
-                    placeholder="Password"
+                    placeholder="Parola"
                     id="password"
                     name="password"
                   />
                   <input
-                    type="confirmPassword"
-                    placeholder="Confirm password"
+                    value={confirmPass}
+                    onChange={(e) => setConfirmPass(e.target.value)}
+                    type="password"
+                    placeholder="Confirmă parola"
                     id="confirmPassword"
                     name="confirmPassword"
                   />
+                  <button type="submit">Înregistrează-te</button>
                 </form>
               </div>
             </MDBModalBody>
-
-            <MDBModalFooter>
-              <MDBBtn>Confirm account</MDBBtn>
-            </MDBModalFooter>
+            {error && <p className="error">{error}</p>}
+            {isSuccess && <p className="success">Înregistrare reușită!</p>}
           </MDBModalContent>
         </MDBModalDialog>
       </MDBModal>
     </>
   );
 };
+export default Register;

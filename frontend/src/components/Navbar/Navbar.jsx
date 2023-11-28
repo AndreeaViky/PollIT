@@ -4,6 +4,7 @@ import Logo from "../../assets/logo.png";
 import "./Navbar.css";
 import { Login } from "../../pages/Login/Login";
 import { Register } from "../../pages/Register/Register";
+import { CreatePoll } from "../../pages/CreatePoll/createPoll";
 
 function Navbar() {
   return (
@@ -12,8 +13,9 @@ function Navbar() {
 
       <div className="text">
         <ul>
-          <Login />
+          {/* <Login /> */}
           <Register />
+          <CreatePoll />
         </ul>
       </div>
     </div>

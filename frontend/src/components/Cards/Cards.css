@@ -1,4 +1,8 @@
 .cards {
-    margin-left: 15px;
-    margin-right: 15px;
+    margin: 30px;
+}
+
+button {
+    color: #04395E; 
+    justify-content: center;
 }
