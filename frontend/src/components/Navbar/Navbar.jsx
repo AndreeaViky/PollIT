@@ -13,9 +13,9 @@ function Navbar() {
 
       <div className="text">
         <ul>
-          {/* <Login /> */}
+          <Login />
           <Register />
-          <CreatePoll />
+          {/* <CreatePoll /> */}
         </ul>
       </div>
     </div>
