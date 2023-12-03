@@ -97,12 +97,14 @@ export const Login = () => {
                 </form>
               </div>
             </MDBModalBody>
-            {isSuccess && <p className="success">Autentificare realizata cu succes!</p>}
+            {isSuccess && (
+              <p className="success">Autentificare realizata cu succes!</p>
+            )}
             {error && <p>Autentificare esuata: {error}</p>}
           </MDBModalContent>
         </MDBModalDialog>
       </MDBModal>
     </>
   );
-}
+};
 export default Login;

@@ -2,7 +2,13 @@
     margin: 30px;
 }
 
-button {
-    color: #04395E; 
-    justify-content: center;
+.buttonVote {
+    background-color: #04395E;
+    color: white;
+    border-radius: 5px;
+}
+
+.button {
+    display: flex;
+    justify-content: right;
 }

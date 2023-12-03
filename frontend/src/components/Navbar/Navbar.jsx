@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import Logo from "../../assets/logo.png";
 
 import "./Navbar.css";
-import { Login } from "../../pages/Login/Login";
-import { Register } from "../../pages/Register/Register";
-import { CreatePoll } from "../../pages/CreatePoll/createPoll";
+import { Login } from "../Login/Login";
+import { Register } from "../Register/Register";
+import { CreatePoll } from "../CreatePoll/createPoll";
 
 function Navbar() {
   return (
@@ -15,7 +15,7 @@ function Navbar() {
         <ul>
           <Login />
           <Register />
-          {/* <CreatePoll /> */}
+          <CreatePoll />
         </ul>
       </div>
     </div>
