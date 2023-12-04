@@ -6,7 +6,6 @@ import {
   MDBModalHeader,
   MDBModalTitle,
   MDBModalBody,
-  MDBModalFooter,
 } from "mdb-react-ui-kit";
 import "./Register.css";
 import { useState } from "react";
@@ -63,6 +62,7 @@ export const Register = () => {
   return (
     <>
       <button onClick={open}>Register</button>
+      {isOpen && <div className="backgroundModal"></div>}
       <MDBModal
         open={isOpen}
         setOpen={setIsOpen}

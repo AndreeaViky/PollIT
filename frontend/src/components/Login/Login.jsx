@@ -6,30 +6,31 @@ import {
   MDBModalHeader,
   MDBModalTitle,
   MDBModalBody,
-  MDBModalFooter,
 } from "mdb-react-ui-kit";
 import "./Login.css";
-import { useState } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export const Login = () => {
+export const Login = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
+  const navigate = useNavigate();
 
   function close() {
     setIsOpen(false);
   }
 
   function open() {
-    console.log("open");
+    // console.log("open");
     setIsOpen(true);
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(email);
+    // console.log(email);
 
     try {
       const response = await fetch("http://localhost:3000/login", {
@@ -44,7 +45,9 @@ export const Login = () => {
       if (response.ok) {
         setIsSuccess(true);
         console.log("Login success:", data);
-        window.location.href = "/"; // Redirecționare către pagina principală
+        onLogin();
+        navigate("/");
+        // window.location.href = "/"; // Redirecționare către pagina principală
       } else {
         setError(data.error || "Eroare la autentificare.");
         console.error("Login failed:", data.error);
@@ -58,6 +61,7 @@ export const Login = () => {
   return (
     <>
       <button onClick={open}>Login</button>
+      {isOpen && <div className="background-dark"></div>}
       <MDBModal
         open={isOpen}
         setOpen={setIsOpen}
@@ -66,15 +70,15 @@ export const Login = () => {
       >
         <MDBModalDialog>
           <MDBModalContent>
-            <MDBModalHeader>
-              <MDBModalTitle>Login</MDBModalTitle>
+            <MDBModalHeader className="headerModal">
+              <MDBModalTitle className="titleModal">Login</MDBModalTitle>
               <MDBBtn
                 className="btn-close"
                 color="none"
                 onClick={close}
               ></MDBBtn>
             </MDBModalHeader>
-            <MDBModalBody>
+            <MDBModalBody className="bodyModal">
               <div className="authForm">
                 <form className="loginForm" onSubmit={handleSubmit}>
                   <input
