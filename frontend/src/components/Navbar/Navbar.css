@@ -1,18 +1,32 @@
-.nav-navbar {
+ .nav-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
     height: 60px;
     position: fixed;
-    justify-content: space-between;
     top: 0;
     background-color: white;
+    z-index: 1070; 
 }
 
+button {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color 0.25s;
+  }
+  
 .text {
     color: #04395E;
-    justify-content: space-between;
+    display: flex;
+    justify-content: flex-end;
     align-items: center;
-    float: right;
-    margin-left: 20px;
 }
 
 .header {
@@ -40,13 +54,6 @@ a {
     opacity: 0;
 } 
 
-.open .mobile-menu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-}
-  
 .mobile-menu {
     display: none;
     position: absolute;
@@ -55,7 +62,7 @@ a {
     height: calc(100vh - 50px);
     width: 100%;
 }
-  
+
 .mobile-menu li {
     margin-bottom: 10px;
 }
@@ -65,7 +72,7 @@ a {
     display: none;
     cursor: pointer;
 }
-  
+
 #hamburger-icon div {
     width: 35px;
     height: 3px;
@@ -74,45 +81,29 @@ a {
     transition: 0.4s;
 }
 
-.open .mobile-menu {
+.nav-links {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
 }
   
-.mobile-menu {
-    display: none;
-    position: absolute;
-    top: 50px;
-    left: 0;
-    height: calc(100vh - 50px);
-    width: 100%;
+.nav-item {
+    margin-right: 10px;
 }
 
-.mobile-menu li {
-    margin-bottom: 10px;
-}
-
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
     .nav-navbar {
         height: 30px;
     }
-    .text {
-        font-size: 15px;
-    }
-
-    .text {
+    .text, .nav-links {
         display: none;
     }
-
     .logo {
         height: 100%;
         padding: 0.3rem;
     }
-
     #hamburger-icon {
-        display: block; 
+        height: 100%;
+        width: 30px;
+        display: block;
     }
-} 
-
+}

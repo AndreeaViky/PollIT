@@ -21,7 +21,7 @@ connection.connect();
 
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1]; // Extrage doar token-ul
+  const token = authHeader && authHeader.split(" ")[1]; // doar token
   if (token == null) return res.sendStatus(401);
 
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
@@ -30,16 +30,6 @@ const authenticateToken = (req, res, next) => {
     next();
   });
 };
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/dist", "index.html"));
-});
-
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/dist", "index.html"));
-});
 
 app.post("/register", async (req, res) => {
   const { email, password } = req.body;
@@ -98,7 +88,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// Creare Poll
+// creare poll
 app.post("/polls", authenticateToken, async (req, res) => {
   const { question, options } = req.body;
   const userId = req.user.id;
@@ -123,21 +113,30 @@ app.post("/polls", authenticateToken, async (req, res) => {
 
     res.status(201).send({ message: "Sondaj creat cu succes." });
   } catch (error) {
+    console.error(error);
     res.status(500).send({ error: "Eroare la crearea sondajului." });
   }
 });
 
-// Citirea tuturor Poll-urilor
+// citire poll + optiuni 
 app.get("/polls", async (req, res) => {
   try {
     const [polls] = await connection.promise().query("SELECT * FROM polls");
+
+    for (const poll of polls) {
+      const [options] = await connection.promise().query("SELECT * FROM options WHERE pollId = ?", [poll.id]);
+      poll.options = options;
+    }
+
     res.status(200).send(polls);
   } catch (error) {
+    console.error(error);
     res.status(500).send({ error: "Eroare la încărcarea sondajelor." });
   }
 });
 
-// Ștergerea Poll-ului
+
+// stergere poll
 app.delete("/polls/:id", authenticateToken, async (req, res) => {
   const pollId = req.params.id;
   const userId = req.user.id;
@@ -153,7 +152,7 @@ app.delete("/polls/:id", authenticateToken, async (req, res) => {
         .send({ error: "Nu aveți permisiunea de a șterge acest sondaj." });
     }
 
-    // Întâi șterge înregistrările din tabela 'votes' și 'options' asociate cu poll-ul
+    // șterge înregistrările din votes și options pt poll
     await connection
       .promise()
       .query("DELETE FROM votes WHERE pollId = ?", [pollId]);
@@ -161,19 +160,19 @@ app.delete("/polls/:id", authenticateToken, async (req, res) => {
       .promise()
       .query("DELETE FROM options WHERE pollId = ?", [pollId]);
 
-    // Apoi șterge poll-ul
+    // șterge poll
     await connection
       .promise()
       .query("DELETE FROM polls WHERE id = ?", [pollId]);
 
     res.status(200).send({ message: "Sondaj șters cu succes." });
   } catch (error) {
-    console.error(error); // Loghează eroarea pentru debugging
+    console.error(error);
     res.status(500).send({ error: "Eroare la ștergerea sondajului." });
   }
 });
 
-// Votare Poll
+// votare poll
 app.patch("/polls/vote/:id", authenticateToken, async (req, res) => {
   const pollId = req.params.id;
   const { optionId } = req.body;
@@ -197,6 +196,16 @@ app.patch("/polls/vote/:id", authenticateToken, async (req, res) => {
   } catch (error) {
     res.status(500).send({ error: "Eroare la votarea sondajului." });
   }
+});
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/dist", "index.html"));
+});
+
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/dist", "index.html"));
 });
 
 const PORT = 3000;
