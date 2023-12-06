@@ -1,20 +1,25 @@
-import React, { useContext, useState } from "react";
+import { useState, useContext } from "react";
 import Logo from "../../assets/logo.png";
-import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../Login/AuthContext.jsx";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./Navbar.css";
 import { Login } from "../Login/Login";
 import { Register } from "../Register/Register";
 import { CreatePoll } from "../CreatePoll/createPoll";
-import { AuthContext } from "../Login/AuthContext";
 
 function Navbar() {
-  const { isLoggedIn } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const { isLoggedIn, onLogin, onLogout } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    onLogout();
+    navigate("/");
+  };
+
   const [showMenu, setShowMenu] = useState(false);
 
   function toggleMobileMenu(menu) {
-    console.log(typeof this);
+    menu.classList.toggle("open");
   }
 
   const closeMenu = () => {
@@ -24,33 +29,53 @@ function Navbar() {
   return (
     <div className="nav-navbar">
       <img className="logo" src={Logo} alt="Logo" />
-
-      <div className="text">
-        <ul>
-          {!isLoggedIn ? (
-            <>
-              <Login />
+      <div className="nav-links">
+        {!isLoggedIn ? (
+          <>
+            <div className="nav-item">
+              <Login onLogin={onLogin} /> {/* Pass onLogin here */}
+            </div>
+            <div className="nav-item">
               <Register />
-            </>
-          ) : (
-            <>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="nav-item">
               <CreatePoll />
+            </div>
+            <div className="nav-item">
               <button onClick={handleLogout}>Logout</button>
+            </div>
+          </>
+        )}
+      </div>
+      <div
+        id="hamburger-icon"
+        onClick={() =>
+          toggleMobileMenu(document.getElementById("hamburger-icon"))
+        }
+      >
+        <ul className="mobile-menu">
+          {!isLoggedIn && (
+            <>
+              <li id="login">
+                <Login onLogin={onLogin} /> {/* Pass onLogin here */}
+              </li>
+              <li id="register">
+                <Register />
+              </li>
             </>
           )}
-        </ul>
-      </div>
-      <div id="hamburger-icon" onClick={toggleMobileMenu(this)}>
-        <ul className="mobile-menu">
-          <li id="login">
-            <Login />
-          </li>
-          <li id="register">
-            <Register />
-          </li>
+          {isLoggedIn && (
+            <li id="logout">
+              <button onClick={handleLogout}>Logout</button>
+            </li>
+          )}
         </ul>
       </div>
     </div>
   );
 }
+
 export default Navbar;
